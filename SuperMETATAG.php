@@ -35,10 +35,6 @@ function supermetatag_options_page_html()
             submit_button();
             ?>
         </form>
-
-        <?php $Test = get_option('Description'); 
-        echo '<label id="Result"></label>';
-        ?>
         
     </div>
     <?php
@@ -48,7 +44,7 @@ function supermetatag_options_page_html()
 function supermetatag_options_page()
 {
     add_menu_page(
-        'SuperMetaTag',
+        'Super Meta Tag by Maik Proba',
         'Super Meta Tag',
         'manage_options',
         'supermetatag',
@@ -58,61 +54,54 @@ function supermetatag_options_page()
         20
     );
 }
-
 add_action('admin_menu', 'supermetatag_options_page');
 /************************************ */
 
+/*Meta Tags for Search Engines*/
+add_action('admin_menu', 'supermetatag_seo_settings');
 
-
-/*Custom Settings */
-
-add_action('admin_menu', 'supermetatag_custom_settings');
-
-function supermetatag_custom_settings(){
+function supermetatag_seo_settings(){
     register_setting('supermetatag-settings-group', 'Description');
     register_setting('supermetatag-settings-group','Keywords');
-    add_settings_section('supermetatag-options', 'Meta Tags', 'supermetatag_options', 'SuperMetaTag');
+    add_settings_section('supermetatag-options', 'Meta Tags for Search Engines', 'supermetatag_options', 'SuperMetaTag');
    
     /*META TAGS*/
     add_settings_field('supermetatag-description', 'Description', 'supermetatag_description', 'SuperMetaTag','supermetatag-options' );
     add_settings_field('supermetatag-keywords', 'Keywords', 'supermetatag_keywords', 'SuperMetaTag','supermetatag-options' );
-
 }
-
-/*
-
-<!-- SEO by Maik Proba --->
-	<meta name="description" content="Gemütliche Wohnzimmeratmosphäre, frischer Kaffee, Frühstück, leckerer Kuchen, Lunch, Snacks und eine große Auswahl an Kaltgetränken, mit Umdrehungen und ohne.">
-	<meta name="keywords" content="Pensionschmidt,Münster,Kaffee,Cafe,Bar,Kultur,Culture,Tickets,Veranstaltungen,Quiche,Kuchen,Frühstück">
-    
-    <meta property="og:title" content="Pensionschmidt - Café, Bar und Kultur – seit 2012 mitten in Münster." />
-	<meta property="og:description" content="Gemütliche Wohnzimmeratmosphäre, frischer Kaffee, Frühstück, leckerer Kuchen, Lunch, Snacks und eine große Auswahl an Kaltgetränken, mit Umdrehungen und ohne." />
-	<meta property="og:url" content="http://www.pensionschmidt.se" />
-	<meta property="og:locale" content="de_DE" />
-	<meta property="og:image" content="http://www.pensionschmidt.se/wp-content/uploads/2018/11/PensionSchmidt-Logo-Slider.svg" />
-	<meta property="og:type" content="website" />
-<!-- SEO by Maik Proba --->
-
-*/
-
+/**/
 
 function supermetatag_options(){
     echo '';
 }
 
-
+/*SEO META TAGS */
 function supermetatag_description(){
     $Description = esc_attr(get_option('Description'));
-    echo '<Textarea style="width: 500px;" id="Description" name="Description" value="'.$Description.'"></Textarea>
+    echo '<Textarea id="Description" name="Description">'.$Description.'</Textarea>
     <label id="Result"></label>
+    <p><em>The Description should have at least <span style="color: red">140</span> characters. Everything below is <span style="color: red;">bad</span>.</p> 
+    <p>Anything between <span style="color: orange">140</span> and <span style="color: orange">150</span> characters is <span style="color: orange">OK</span>. 160 characters are <span style="color: green">perfect</span>. </em></p>
     ';
 }
 
 function supermetatag_keywords(){
     $Keywords = esc_attr(get_option('Keywords'));
-    echo '<input type="text" name="Keywords" value="'.$Keywords.'" />';
+    echo '<input id="Keywords" type="text" name="Keywords" value="'.$Keywords.'" />
+    <p><em>Separate each <strong>keyword</strong> with a comma <code>,</code><em></p>';
 }
-
+/**/
 
 /*Add Script */
-wp_enqueue_script('custom_script', plugin_dir_url(__FILE__).'Counting.js', array('jquery')); 
+wp_enqueue_script('counting_script', plugin_dir_url(__FILE__).'Counting.js', array('jquery')); 
+wp_enqueue_script('addKeywords_script', plugin_dir_url(__FILE__).'addKeywords.js', array('jquery')); 
+/**/
+
+/*Add Style */
+wp_enqueue_style('custom_style', plugin_dir_url(__FILE__).'Style.css', null);
+/**/
+
+/*Add php file */
+include( plugin_dir_path( __FILE__ ) . 'metatagHead.php');
+include( plugin_dir_path( __FILE__ ) . 'SuperMETATAG_OpenGraph.php');
+/**/
