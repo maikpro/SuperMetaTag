@@ -3,7 +3,7 @@
 /*
 Plugin Name:  SuperMETATAG
 Plugin URI:   https://mpcoding.de/plugins/supermetatag/
-Description:  Wordpress Plugin to create SEO Meta Tags
+Description:  A simple Wordpress Plugin to create SEO Meta Tags for Google, Facebook and Twitter.
 Version:      1.0
 Author:       Maik Proba
 Author URI:   https://mpcoding.de/
@@ -12,7 +12,6 @@ License URI:  https://www.gnu.org/licenses/gpl-2.0.html
 */
 
 defined( 'ABSPATH' ) or die( 'No script kiddies please!' );
-
 function supermetatag_options_page_html()
 {
     // check user capabilities
@@ -21,7 +20,7 @@ function supermetatag_options_page_html()
     }
     ?>
     <div class="wrap">
-        <h1><?= esc_html(get_admin_page_title()); ?></h1>
+        <h1><?= esc_html(get_admin_page_title());?></h1>
         <?php settings_errors(); ?>
         <form method="post" action="options.php">
             
@@ -44,13 +43,12 @@ function supermetatag_options_page_html()
 function supermetatag_options_page()
 {
     add_menu_page(
-        'Super Meta Tag by Maik Proba',
-        'Super Meta Tag',
+        'SuperMetaTag 1.0',
+        'SuperMetaTag',
         'manage_options',
         'supermetatag',
         'supermetatag_options_page_html',
-        'https://dummyimage.com/20x20/00aeff/fff',
-        /*plugin_dir_url(__FILE__) . 'images/icon_wporg.png',*/
+        plugin_dir_url(__FILE__) . '/logo/smt_logo.svg',
         20
     );
 }
@@ -66,8 +64,8 @@ function supermetatag_seo_settings(){
     add_settings_section('supermetatag-options', 'Meta Tags for Search Engines', 'supermetatag_options', 'SuperMetaTag');
    
     /*META TAGS*/
-    add_settings_field('supermetatag-description', 'Description', 'supermetatag_description', 'SuperMetaTag','supermetatag-options' );
-    add_settings_field('supermetatag-keywords', 'Keywords', 'supermetatag_keywords', 'SuperMetaTag','supermetatag-options' );
+    add_settings_field('supermetatag-description', '<span class="dashicons dashicons-editor-alignleft"></span> Description', 'supermetatag_description', 'SuperMetaTag','supermetatag-options' );
+    add_settings_field('supermetatag-keywords', '<span class="dashicons dashicons-search"></span> Keywords', 'supermetatag_keywords', 'SuperMetaTag','supermetatag-options' );
 }
 /**/
 
@@ -93,15 +91,14 @@ function supermetatag_keywords(){
 /**/
 
 /*Add Script */
-wp_enqueue_script('counting_script', plugin_dir_url(__FILE__).'Counting.js', array('jquery')); 
-wp_enqueue_script('addKeywords_script', plugin_dir_url(__FILE__).'addKeywords.js', array('jquery')); 
+wp_enqueue_script('counting_script', plugin_dir_url(__FILE__).'/js/Counting.js', array('jquery')); 
 /**/
 
 /*Add Style */
-wp_enqueue_style('custom_style', plugin_dir_url(__FILE__).'Style.css', null);
+wp_enqueue_style('custom_style', plugin_dir_url(__FILE__).'/css/Style.css', null);
 /**/
 
 /*Add php file */
-include( plugin_dir_path( __FILE__ ) . 'metatagHead.php');
-include( plugin_dir_path( __FILE__ ) . 'SuperMETATAG_OpenGraph.php');
+include( plugin_dir_path( __FILE__ ) . 'SuperMetaTag_createHead.php');
+include( plugin_dir_path( __FILE__ ) . 'SuperMetaTag_OpenGraph.php');
 /**/
