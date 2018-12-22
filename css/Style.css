@@ -1,0 +1,17 @@
+#Description, #Keywords, #Ogdescription{
+    width: 500px;
+}
+
+#Description, #Ogdescription{
+    height: 80px;
+}
+
+#Ogurl, #Ogimage{
+    width: 250px;
+}
+
+#Flags{
+    width: 30px;
+    height: 20px;
+    /*background: url("flags/it.png");*/
+}
