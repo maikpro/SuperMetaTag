@@ -2,7 +2,7 @@
 
 /*
 Plugin Name:  SuperMETATAG
-Plugin URI:   https://mpcoding.de/plugins/supermetatag/
+Plugin URI:   https://github.com/maikpro/SuperMetaTag
 Description:  A simple Wordpress Plugin to create SEO Meta Tags for Google, Facebook and Twitter.
 Version:      1.0
 Author:       Maik Proba
