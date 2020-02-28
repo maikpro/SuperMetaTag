@@ -21,6 +21,7 @@ function supermetatag_options_page_html()
     ?>
     <div class="wrap">
         <h1><?= esc_html(get_admin_page_title());?></h1>
+        <h2>by Maik Proba Version 1.0</h2>
         <?php settings_errors(); ?>
         <form method="post" action="options.php">
             
@@ -100,5 +101,5 @@ wp_enqueue_style('custom_style', plugin_dir_url(__FILE__).'/css/Style.css', null
 
 /*Add php file */
 include( plugin_dir_path( __FILE__ ) . 'SuperMetaTag_createHead.php');
-include( plugin_dir_path( __FILE__ ) . 'SuperMetaTag_OpenGraph.php');
+include( plugin_dir_path( __FILE__ ) . 'SuperMETATAG_OpenGraph.php');
 /**/

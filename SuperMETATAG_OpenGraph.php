@@ -5,7 +5,7 @@
 /**/
 
 /*Add Script */
-wp_enqueue_script('opengraph_script', plugin_dir_url(__FILE__).'OpenGraph.js', array('jquery')); 
+wp_enqueue_script('opengraph_script', plugin_dir_url(__FILE__).'/js/OpenGraph.js', array('jquery')); 
 /**/
 
 
